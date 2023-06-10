@@ -1,6 +1,7 @@
 package com.example.rentalservice.Service;
 
 import com.example.rentalservice.Model.Rental;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,5 +25,9 @@ public class RentalService {
     public Rental returnMovie(Long id) {
         Rental forObject = this.restTemplate.getForObject("https://localhost:8080/isAvaiable/{id}", Rental.class, id);
         return forObject;
+    }
+
+    public void rentMovie(Long id) {
+        restTemplate.put("http://localhost:8080/movies/{id}/set_available/false", HttpEntity.EMPTY, id);
     }
 }
